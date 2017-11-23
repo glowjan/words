@@ -18,6 +18,14 @@ main = hspec $ do
             (findWord grid "CSHARP" ) `shouldBe`  True
         it "Should find word written bottom up" $ do
             (findWord grid "LISP" ) `shouldBe`  True
+        it "Should find word written diagonal from top left" $ do
+            (findWord grid "RUBY" ) `shouldBe`  True
+        it "Should find word written diagonal from bottom left" $ do
+            (findWord grid "COBOL" ) `shouldBe`  True
+        it "Should find word written diagonal from bottom right" $ do
+            (findWord grid "BASIC" ) `shouldBe`  True
+        it "Should find word written diagonal from top right" $ do
+            (findWord grid "SCHEME" ) `shouldBe`  True
         it "Should not find word not existing" $ do
             (findWord  grid "JAVA") `shouldBe`  False
 
