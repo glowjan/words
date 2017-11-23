@@ -10,7 +10,9 @@ main = hspec $ do
             (findWordInLine "auto" "car") `shouldBe`  False
 
     describe "Searching for words in grid" $ do
-        it "Should find word 'auto' in grid 'automitve','car'" $ do
-            (findWord ["automotive","car"] "auto" ) `shouldBe`  True
-        it "Should not find word 'auto' in grid 'car','train','robot'" $ do
-            (findWord  ["car","train","robot"] "auto") `shouldBe`  False
+        it "Should find word written from left to right" $ do
+            (findWord grid "HASKELL" ) `shouldBe`  True
+        it "Should find word written from right to left" $ do
+            (findWord grid "PERL" ) `shouldBe`  True
+        it "Should not find word not existing" $ do
+            (findWord  grid "JAVA") `shouldBe`  False
