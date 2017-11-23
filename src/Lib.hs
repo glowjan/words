@@ -33,9 +33,12 @@ skew (h : t) = h : skew (map indent t)
 getLines :: Grid -> [String]
 getLines grid = let horizontal = grid
                     vertical = transpose horizontal
-                    diagonal = transpose (skew grid) ++ transpose (skew (reverse grid))
+                    diagonal = diagonalize grid ++ diagonalize (reverse grid)
                     lines = vertical ++ horizontal ++ diagonal
                 in  lines ++ map reverse lines
+
+diagonalize :: Grid -> Grid
+diagonalize = transpose . skew
 
 findWordInLine :: String -> String -> Bool
 findWordInLine = isInfixOf
