@@ -4,10 +4,11 @@ module Lib
       grid,
       languages,
       findWordInLine,
-      findWord
+      findWord,
+      findWords
     ) where
 
-import Data.List (isInfixOf)
+import Data.List (isInfixOf, transpose)
 
 type Grid = [String]
 
@@ -17,10 +18,17 @@ outputGrid grid = putStrLn $ formatGrid grid
 formatGrid :: Grid -> String
 formatGrid = unlines
 
+findWords :: Grid -> [String] -> [String]
+findWords grid languages = filter (findWord grid) languages
+
 findWord :: Grid -> String -> Bool
-findWord grid word =
-    let lines = grid ++ map reverse grid
-    in or $ map (findWordInLine word) lines
+findWord grid word = or $ map (findWordInLine word) (getLines grid)
+
+getLines :: Grid -> [String]
+getLines grid = let horizontal = grid
+                    vertical = transpose horizontal
+                    lines = vertical ++ horizontal
+                in  lines ++ map reverse lines
 
 findWordInLine :: String -> String -> Bool
 findWordInLine = isInfixOf
